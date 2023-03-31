@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'idea'
+}
+
+group 'org.obiz.export'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'commons-cli:commons-cli:1.5.0'
+    implementation 'com.oracle.database.jdbc:ojdbc8:21.9.0.0'
+    implementation 'org.dhatim:fastexcel:0.14.18'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
+}
+
+test {
+    useJUnitPlatform()
+}
