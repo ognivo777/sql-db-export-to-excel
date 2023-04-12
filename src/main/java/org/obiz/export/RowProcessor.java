@@ -18,10 +18,12 @@ public class RowProcessor {
     private final ArrayList<String> columnNames;
     private final ArrayList<Integer> columnTypes;
     int currrentRow = 0;
+    private int batch;
 
-    public RowProcessor(ResultSetMetaData metaData, Workbook wb) throws SQLException {
+    public RowProcessor(ResultSetMetaData metaData, Workbook wb, int batch) throws SQLException {
         columnCount = metaData.getColumnCount();
         this.wb = wb;
+        this.batch = batch;
         columnNames = new ArrayList<>();
         columnTypes = new ArrayList<>();
         ws = wb.newWorksheet("Export data");
@@ -39,10 +41,10 @@ public class RowProcessor {
             fillCell(i, resultSet);
         }
         currrentRow++;
-        if(currrentRow%500==0) {
+        if(currrentRow%batch==0) {
             System.out.print("|");
-            if(currrentRow%(500*50)==0) {
-                System.out.println();
+            if(currrentRow%(batch * 100)==0) {
+                System.out.println(" " + currrentRow);
             }
             ws.flush();
         }
