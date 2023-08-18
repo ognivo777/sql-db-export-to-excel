@@ -20,7 +20,7 @@ public class Main {
             System.out.println("sql:\n" + sql);
             Loader loader = new Loader(conn, sql);
             Instant start = Instant.now();
-            File exportResult = loader.doExport(500);
+            File exportResult = loader.doExport(500, config.getOutputFile());
             System.out.println("exportResult.length() = " + exportResult.length());
             System.out.println("Takes seconds: " + start.until(Instant.now(), ChronoUnit.MILLIS)/1000f);
         } catch (ClassNotFoundException | SQLException | IOException e) {

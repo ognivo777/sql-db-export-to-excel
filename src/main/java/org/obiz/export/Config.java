@@ -8,7 +8,8 @@ public class Config {
     private String connectString;
     private String user;
     private String passwd;
-    private String queryFile;
+    private String queryFile;    
+    private String outputFile;
     //    private String schema;
 
     public Config() {
@@ -34,6 +35,10 @@ public class Config {
                 .argName("query.sql").required().desc("File name with query.").build();
         options.addOption(sql);
 
+        Option output = Option.builder().longOpt("output").option("o").hasArg()
+                .argName("output").desc("Output file name").build();
+        options.addOption(output);
+
 //        Option dbSchema = Option.builder().longOpt("schema").option("s").hasArg()
 //                .argName("schema").desc("Database schema. \"rules\" is used by default.").build();
 //        options.addOption(dbSchema);
@@ -48,6 +53,10 @@ public class Config {
             user = cmd.getOptionValue('u');
             passwd = cmd.getOptionValue('p');
             queryFile = cmd.getOptionValue('q');
+            outputFile = cmd.getOptionValue('o');
+            if (outputFile == null) {
+                outputFile = "export.xlsx";
+            }
         } catch (Exception e) {
             System.err.println("Can not start.  Reason: " + e.getMessage());
             HelpFormatter formatter = new HelpFormatter();
@@ -71,5 +80,9 @@ public class Config {
 
     public String getQueryFile() {
         return queryFile;
+    }
+
+    public String getOutputFile() {
+        return outputFile;
     }
 }

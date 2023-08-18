@@ -16,8 +16,8 @@ public class Loader {
         this.query = query;
     }
 
-    public File doExport(int batch) {
-        try (OutputStream os =  new FileOutputStream("exportResult.xlsx")) {
+    public File doExport(int batch, String outputFile) {
+        try (OutputStream os =  new FileOutputStream(outputFile)) {
             Workbook wb = new Workbook(os, "DbExporter", "1.0");
 
             Thread.sleep(1);
@@ -40,6 +40,6 @@ public class Loader {
             e.printStackTrace();
         }
         //TODO
-        return new File("export.xlsx");
+        return new File(outputFile);
     }
 }
